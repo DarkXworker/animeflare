@@ -1,0 +1,10 @@
+/* Append to globals.css */
+.label-xs {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: var(--text2);
+  font-family: 'Syne', sans-serif;
+  letter-spacing: 0.03em;
+}
