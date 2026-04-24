@@ -1,0 +1,58 @@
+# ── Render Deployment Config ──────────────────────────
+# Docs: https://render.com/docs/render-yaml-reference
+# Place this file in your backend repo root
+
+services:
+  - type: web
+    name: animex-backend
+    env: node
+    region: singapore   # Change: oregon, frankfurt, ohio, virginia
+    plan: free           # free = 512MB RAM, spins down after 15min inactivity
+                         # starter = $7/mo, always on — recommended for production
+
+    # Build command
+    buildCommand: npm install
+
+    # Start command
+    startCommand: npm start
+
+    # Health check — Render uses this to verify deployment
+    healthCheckPath: /health
+
+    # Auto-deploy on push to main branch
+    autoDeploy: true
+
+    # Environment variables
+    # Set these in Render Dashboard → Environment
+    # DO NOT put secrets in this file
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      - key: PORT
+        value: 4000
+
+      # ── Set these in Render Dashboard ──────────────
+      # - key: SUPABASE_URL
+      #   value: https://xxx.supabase.co
+      #
+      # - key: SUPABASE_ANON_KEY
+      #   value: eyJ...
+      #
+      # - key: SUPABASE_SERVICE_ROLE_KEY
+      #   value: eyJ...
+      #
+      # - key: STREAM_TOKEN_SECRET
+      #   generateValue: true    # Render auto-generates a random secret!
+      #
+      # - key: UPSTASH_REDIS_REST_URL
+      #   value: https://xxx.upstash.io
+      #
+      # - key: UPSTASH_REDIS_REST_TOKEN
+      #   value: xxx
+      #
+      # - key: TMDB_API_KEY
+      #   value: your_key
+      #
+      # - key: FRONTEND_URL
+      #   value: https://your-animex.vercel.app
